@@ -10,5 +10,7 @@ class Kernel
 
     public function handle(Request $request): Response
     {
+        $response = new Response(200, "Requested: $request->path");
+        return $response;
     }
 }

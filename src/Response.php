@@ -10,15 +10,15 @@ class Response
 
     public string $headers;
 
-    public function __construct(int $responseCode, string $body, string $headers)
+    public function __construct(int $responseCode, string $body, string $headers = '')
     {
+        $this->headers = $headers;
         $this->responseCode = $responseCode;
         $this->body = $body;
-        $this->headers = $headers;
     }
 
-    public function echo(): void {
-
+    public function echo(): void
+    {
         echo $this->body;
     }
 }
