@@ -4,13 +4,20 @@ namespace Framework;
 
 class Kernel
 {
+    private Router $router;
+
     public function __construct()
     {
+        $this->router = new Router();
     }
 
     public function handle(Request $request): Response
     {
-        $response = new Response(200, "Requested: $request->path");
-        return $response;
+        return $this->router->dispatch($request);
+    }
+
+    public function getRouter(): Router
+    {
+        return $this->router;
     }
 }
