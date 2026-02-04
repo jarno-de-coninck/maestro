@@ -19,6 +19,8 @@ class Response
 
     public function echo(): void
     {
+        http_response_code($this->responseCode);
+
         echo $this->body;
     }
 }
