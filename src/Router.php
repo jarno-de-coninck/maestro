@@ -21,20 +21,20 @@ class Router
     {
         foreach ($this->routes as $route) {
             if ($route->matches($request->method, $request->path)) {
-                $response = new Response(200, "$route->return");
+                $response = ($route->callback)();
                 break;
             }
         }
 
         if (!isset($response)) {
-            $response = new Response(404, "Not Found");
+            $response = new Response("Not Found", '', 404);
         }
 
         return $response;
     }
 
-    public function addRoute(string $method, string $path, string $return): void
+    public function addRoute(string $method, string $path, callable $callback): void
     {
-        $this->routes[] = new Route($method, $path, $return);
+        $this->routes[] = new Route($method, $path, $callback);
     }
 }

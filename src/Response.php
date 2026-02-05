@@ -10,7 +10,7 @@ class Response
 
     public string $headers;
 
-    public function __construct(int $responseCode, string $body, string $headers = '')
+    public function __construct(string $body, string $headers = '', int $responseCode = 200)
     {
         $this->headers = $headers;
         $this->responseCode = $responseCode;
