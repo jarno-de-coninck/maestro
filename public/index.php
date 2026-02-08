@@ -3,10 +3,14 @@
 require __DIR__ . '/../vendor/autoload.php';
 
 use App\RouteProvider;
+use App\ServiceProvider;
 use Framework\Kernel;
 use Framework\Request;
 
 $kernel = new Kernel();
+
+$serviceProvider = new ServiceProvider();
+$kernel->registerServices($serviceProvider);
 
 $routeProvider = new RouteProvider();
 $kernel->registerRoutes($routeProvider);
