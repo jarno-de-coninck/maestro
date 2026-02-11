@@ -2,18 +2,24 @@
 
 namespace App\Controllers;
 
-
 use Framework\Response;
+use Framework\ResponseFactory;
 
 class HomeController
 {
+    private ResponseFactory $responseFactory;
+    public function __construct(ResponseFactory $responseFactory)
+    {
+        $this->responseFactory = $responseFactory;
+    }
+
     public function index(): Response
     {
-        return new Response("This should be the index");
+        return $this->responseFactory->body("Home page");
     }
 
     public function about(): Response
     {
-        return new Response("About page");
+        return $this->responseFactory->body("About page");
     }
 }

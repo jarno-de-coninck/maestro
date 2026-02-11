@@ -4,12 +4,14 @@ namespace Framework;
 
 class Router
 {
+    private ResponseFactory $responseFactory;
     /** @var Route[]  */
     public array $routes;
 
-    public function __construct()
+    public function __construct(ResponseFactory $responseFactory)
     {
         $this->routes = [];
+        $this->responseFactory = $responseFactory;
     }
 
     /**
@@ -21,16 +23,11 @@ class Router
     {
         foreach ($this->routes as $route) {
             if ($route->matches($request->method, $request->path)) {
-                $response = ($route->callback)();
-                break;
+                return $response = ($route->callback)();
             }
         }
 
-        if (!isset($response)) {
-            $response = new Response("Not Found", '', 404);
-        }
-
-        return $response;
+        return $this->responseFactory->notFound();
     }
 
     public function addRoute(string $method, string $path, callable $callback): void

@@ -5,13 +5,16 @@ namespace Framework;
 class Kernel
 {
     private Router $router;
-
     private ServiceContainer $serviceContainer;
 
     public function __construct()
     {
-        $this->router = new Router();
         $this->serviceContainer = new ServiceContainer();
+
+        $responseFactory = new ResponseFactory();
+        $this->serviceContainer->set(ResponseFactory::class, $responseFactory);
+
+        $this->router = new Router($responseFactory);
     }
 
     public function handle(Request $request): Response
