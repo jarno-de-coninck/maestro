@@ -15,11 +15,11 @@ class TaskController
 
     public function index(): Response
     {
-        return $this->responseFactory->body("All tasks");
+        return $this->responseFactory->view('tasks/index.html.twig');
     }
 
     public function create(): Response
     {
-        return $this->responseFactory->body("Create new task");
+        return $this->responseFactory->view('tasks/create.html.twig');
     }
 }

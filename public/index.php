@@ -7,7 +7,12 @@ use App\ServiceProvider;
 use Framework\Kernel;
 use Framework\Request;
 
-$kernel = new Kernel();
+$config = array(
+    'APP_ENV' => 'development',
+    'VIEWS_PATH' => '../app/views',
+);
+
+$kernel = new Kernel($config);
 
 $serviceProvider = new ServiceProvider();
 $kernel->registerServices($serviceProvider);
